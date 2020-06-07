@@ -1,0 +1,92 @@
+{
+  "elements": [
+    {
+      "isAspect": true,
+      "icon": "warped3",
+      "id": "warped",
+      "label": "Warped",
+      "description": "Warped flesh, strange growths, extra eyes... Something disturbing has happened, but it may be possible to turn this to your advantage..."
+    },
+    {
+      "isAspect": true,
+      "icon": "food",
+      "id": "food",
+      "label": "Food",
+      "description": "Nourishment for the body, though not yours."
+    },
+    {
+      "isAspect": true,
+      "icon": "venerationheart",
+      "id": "seed",
+      "label": "Seeds",
+      "description": "Seeds are needed to grow crops"
+    },
+    {
+      "isAspect": true,
+      "icon": "growing",
+      "id": "growing",
+      "label": "Growing",
+      "description": "A healthy, growing plant"
+    },
+    {
+      "isAspect": true,
+      "icon": "grown",
+      "id": "grown",
+      "label": "Grown",
+      "description": "A crop that is ready to harvest"
+    },
+    {
+      "isAspect": true,
+      "icon": "illhealth",
+      "id": "spoiled",
+      "label": "Spoiled",
+      "description": "This will probably make someone sick",
+      "induces": [
+        {
+          "id": "spoiledinduction",
+          "chance": 75,
+          "additional": true
+        }
+      ]
+    },
+    {
+      "isAspect": true,
+      "icon": "vaultlandbeyondforest",
+      "id": "crop",
+      "label": "Crop",
+      "description": "A plant, grown for a purpose."
+    },
+    {
+      "isAspect": true,
+      "isHidden": true,
+      "noartneeded": true,
+      "icon": "harvest",
+      "id": "harvest",
+      "label": "harvest",
+      "description": "harvests crops"
+    },
+    {
+      "isAspect": true,
+      "isHidden": true,
+      "noartneeded": true,
+      "icon": "",
+      "id": "payvillager",
+      "label": "payvillager",
+      "description": "converts a villager or farmhand into a farmhand with a fresh timer"
+    },
+    {
+      "isAspect": true,
+      "isHidden": true,
+      "noartneeded": true,
+      "icon": "villagehidden",
+      "id": "villagehidden"
+    },
+    {
+      "isAspect": true,
+      "isHidden": true,
+      "noartneeded": true,
+      "icon": "sell",
+      "id": "sell"
+    }
+  ]
+}

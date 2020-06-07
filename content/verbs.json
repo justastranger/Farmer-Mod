@@ -1,0 +1,21 @@
+{
+  "verbs": [
+    {
+      "id": "cropgrowth",
+      "label": "The Story of Life",
+      "description": "Represents the passage of time for growing crops, in order to turn them into grown crops that can then be harvested.",
+      "atStart": false,
+      "slots": [
+        {
+          "id": "crop",
+          "label": "crop",
+          "description": "A Growing Crop",
+          "actionId": "",
+          "required": {
+            "growing": 1
+          }
+        }
+      ]
+    }
+  ]
+}

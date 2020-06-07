@@ -1,0 +1,502 @@
+{
+  "elements": [
+    {
+      "icon": "plot.wheat",
+      "id": "plot.wheat",
+      "label": "Wheat Crop",
+      "description": "A Crop of Wheat, still in the ground",
+      "decayTo": "plot.wheat.grown",
+      "aspects": {
+        "growing": 1,
+        "crop": 1
+      },
+      "xtriggers": {
+        "harvest": [
+          {
+            "id": "plot.empty"
+          }
+        ]
+      },
+      "lifetime": 30,
+      "resaturate": true
+    },
+    {
+      "icon": "plot.empty",
+      "id": "plot.empty",
+      "label": "An Empty Farm Plot",
+      "description": "An empty farm plot that you can use to plant a crop.",
+      "aspects": {
+        "job": 1
+      },
+      "slots": [
+        {
+          "id": "Seed",
+          "label": "Seed",
+          "description": "Sow some seed",
+          "actionId": "work",
+          "required": {
+            "seed": 1
+          }
+        },
+        {
+          "id": "Work",
+          "label": "Work",
+          "description": "It takes a lot of work to sow a field...",
+          "actionId": "work",
+          "required": {
+            "farmhand": 1,
+            "health": 1
+          }
+        }
+      ]
+    },
+    {
+      "icon": "seeds.wheat",
+      "id": "seeds.wheat",
+      "label": "Wheat Seeds",
+      "description": "Seeds used to grow grain",
+      "aspects": {
+        "seed": 1
+      }
+    },
+    {
+      "icon": "food.wheat",
+      "id": "food.wheat",
+      "label": "Sack of Wheat",
+      "description": "Grain harvested from wheat, ready to be used to feed the townsfolk.",
+      "decayTo": "food.spoiled",
+      "aspects": {
+        "ingredient": 1,
+        "food": 1
+      },
+      "xtriggers": {
+        "village": [
+          {
+            "id": "shipment"
+          }
+        ]
+      },
+      "lifetime": 180
+    },
+    {
+      "icon": "ingredientwinterf",
+      "id": "food.spoiled",
+      "label": "Spoiled Food",
+      "description": "Unfortunately, worms and other pests have made their way into these supplies. Perhaps it could still be used if you're desperate...",
+      "aspects": {
+        "food": 1,
+        "spoiled": 1,
+        "ingredient": 1
+      },
+      "xtriggers": {
+        "village": [
+          {
+            "id": "shipment"
+          }
+        ]
+      },
+      "lifetime": 60
+    },
+    {
+      "icon": "vaultshiresdefault",
+      "id": "farmhouse",
+      "label": "The Farmhouse",
+      "description": "A Farmhouse out in the country, nice and secluded.",
+      "aspects": {
+        "location": 1,
+        "hq.potential": 1,
+        "hq": 1
+      },
+      "slots": [
+        {
+          "id": "Victim",
+          "label": "Victim",
+          "description": "Lure a villager home so that they may be of use to you.",
+          "actionId": "talk",
+          "required": {
+            "villager": 1
+          },
+          "consumes": true
+        },
+        {
+          "id": "funds",
+          "label": "funds",
+          "description": "Funds to purchase more land with.",
+          "actionId": "talk",
+          "required": {
+            "funds": 1
+          },
+          "consumes": true
+        }
+      ],
+      "unique": true
+    },
+    {
+      "icon": "apostlelantern.pillar2",
+      "id": "plot.dead",
+      "label": "Dead Crop",
+      "description": "All the crops have withered and died, leaving once-vibrant husks littering the field.",
+      "aspects": {
+        "job": 1
+      },
+      "slots": [
+        {
+          "id": "Work",
+          "label": "Work",
+          "description": "It'll take a lot of work to clear this plot back out for use...",
+          "actionId": "work",
+          "required": {
+            "farmhand": 1,
+            "health": 1
+          }
+        }
+      ],
+      "xtriggers": {
+        "harvest": [
+          {
+            "id": "plot.empty"
+          }
+        ]
+      }
+    },
+    {
+      "icon": "vaultcapital5",
+      "id": "village",
+      "label": "The Village",
+      "description": "The local village, full of hungry mouths to feed.",
+      "aspects": {
+        "villagehidden": 1,
+        "location": 1
+      },
+      "slots": [
+        {
+          "id": "Food",
+          "label": "Food",
+          "description": "Food for the villagers to eat",
+          "actionId": "explore",
+          "required": {
+            "food": 1,
+            "convoy": 1
+          },
+          "consumes": false
+        }
+      ],
+      "unique": true
+    },
+    {
+      "icon": "generic_a",
+      "id": "villager",
+      "label": "A Villager",
+      "description": "A simple villager",
+      "aspects": {
+        "mortal": 1
+      },
+      "slots": [
+        {
+          "id": "funds",
+          "label": "Payment",
+          "description": "Pay this villager to come help you on the farm.",
+          "actionId": "talk",
+          "required": {
+            "funds": 1
+          },
+          "consumes": true
+        }
+      ],
+      "xtriggers": {
+        "killmortal": [
+          {
+            "id": "corpse"
+          }
+        ],
+        "warped": [
+          {
+            "id": "villager.warped"
+          }
+        ],
+        "derangemortal": [
+          {
+            "id": "lunatic"
+          }
+        ],
+        "payvillager": [
+          {
+            "id": "farmhand"
+          }
+        ]
+      }
+    },
+    {
+      "icon": "generic_a_heart",
+      "id": "farmhand",
+      "label": "A Strong Farmhand",
+      "description": "A farmhand paid to help you out around the farm for a short time.",
+      "decayTo": "villager",
+      "aspects": {
+        "follower": 1,
+        "heart": 2,
+        "mortal": 1
+      },
+      "slots": [
+        {
+          "id": "funds",
+          "label": "Payment",
+          "description": "Pay the farmhand to stick around a little longer",
+          "actionId": "talk",
+          "required": {
+            "funds": 1
+          },
+          "consumes": true
+        }
+      ],
+      "xtriggers": {
+        "killmortal": [
+          {
+            "id": "corpse"
+          }
+        ],
+        "fatiguing": [
+          {
+            "id": "villager"
+          }
+        ],
+        "payvillager": [
+          {
+            "id": "farmhand"
+          }
+        ]
+      },
+      "lifetime": 60
+    },
+    {
+      "icon": "plot.wheat",
+      "id": "plot.wheat.first",
+      "label": "Your First Harvest",
+      "description": "The first Harvest since his death.",
+      "uniquenessgroup": "",
+      "aspects": {
+        "job": 1,
+        "crop": 1
+      },
+      "slots": [
+        {
+          "id": "Work",
+          "label": "Work",
+          "description": "Your first harvest will take a lot of effort.",
+          "actionId": "work",
+          "required": {
+            "health": 1
+          }
+        }
+      ],
+      "xtriggers": {
+        "harvest": [
+          {
+            "id": "plot.empty"
+          }
+        ]
+      }
+    },
+    {
+      "icon": "toolknockb",
+      "id": "farmertablet",
+      "label": "A Strange Tablet",
+      "description": "A strange stone tablet you found while plowing your field. Depicted upon its surface are scenes of massive feasts, over-indulgence of wines, and even cannibalism. There seems to be a crow watching in every scene.",
+      "aspects": {
+        "legacyplotitem": 1
+      }
+    },
+    {
+      "icon": "plot.wheat",
+      "id": "plot.wheat.bountiful",
+      "label": "Bountiful Wheat Crop",
+      "description": "An unusually large crop of wheat.",
+      "decayTo": "plot.dead",
+      "aspects": {
+        "crop": 1,
+        "grown": 2,
+        "job": 1
+      },
+      "xtriggers": {
+        "harvest": [
+          {
+            "id": "plot.empty"
+          }
+        ]
+      },
+      "lifetime": 120
+    },
+    {
+      "icon": "cash",
+      "id": "shipment",
+      "label": "Shipment",
+      "description": "More Shipments = More Money from Village",
+      "xtriggers": {
+        "sell": [
+          {
+            "id": "funds"
+          }
+        ]
+      }
+    },
+    {
+      "icon": "tentacle",
+      "id": "warpedflesh",
+      "label": "Destabilized Flesh",
+      "description": "You flesh; your clay. Your body; your sculpture.",
+      "aspects": {
+        "ability": 1,
+        "heart": 2,
+        "tool": 1,
+        "warped": 2,
+        "edge": 2
+      }
+    },
+    {
+      "icon": "plot.wheat",
+      "id": "plot.wheat.grown",
+      "label": "Harvestable Wheat",
+      "decayTo": "plot.dead",
+      "aspects": {
+        "crop": 1,
+        "grown": 1,
+        "job": 1
+      },
+      "xtriggers": {
+        "harvest": [
+          {
+            "id": "plot.empty"
+          }
+        ]
+      },
+      "lifetime": 120
+    },
+    {
+      "icon": "food.warped",
+      "id": "food.warped",
+      "label": "Warped Food",
+      "aspects": {
+        "food": 1,
+        "warped": 1
+      },
+      "xtriggers": {
+        "village": [
+          {
+            "id": "shipment"
+          }
+        ]
+      }
+    },
+    {
+      "icon": "villager.warped",
+      "id": "villager.warped",
+      "label": "A Warped Villager",
+      "aspects": {
+        "mortal": 1,
+        "warped": 1
+      },
+      "xtriggers": {
+        "killmortal": [
+          {
+            "id": "corpse"
+          }
+        ],
+        "derangemortal": [
+          {
+            "id": "lunatic"
+          }
+        ]
+      }
+    },
+    {
+      "icon": "ascensionsensationc",
+      "id": "temptationflesh",
+      "label": "Temptation: Flesh",
+      "description": "You've become dreaming of being able to mold your body like clay.",
+      "aspects": {
+        "desire": 1
+      }
+    },
+    {
+      "icon": "plot.empty",
+      "id": "plot.corn",
+      "label": "A Corn Field",
+      "description": "Corn, thrusting its way up to the sky.",
+      "decayTo": "plot.corn.grown",
+      "aspects": {
+        "growing": 1,
+        "crop": 1
+      },
+      "lifetime": 60
+    },
+    {
+      "icon": "plot.wheat1",
+      "id": "plot.corn.grown",
+      "label": "A Corn Field, Grown",
+      "description": "A fully grown field of corn",
+      "decayTo": "plot.dead",
+      "aspects": {
+        "crop": 1,
+        "grown": 1,
+        "job": 1
+      },
+      "xtriggers": {
+        "harvest": [
+          {
+            "id": "plot.empty"
+          }
+        ]
+      },
+      "lifetime": 120
+    },
+    {
+      "icon": "seeds.corn",
+      "id": "seeds.corn",
+      "label": "Corn",
+      "description": "Corn, ready to germinate",
+      "aspects": {
+        "seeds": 1,
+        "seed": 1
+      }
+    },
+    {
+      "icon": "seeds.corn",
+      "id": "food.corn",
+      "label": "A Sack of Corn",
+      "decayTo": "food.spoiled",
+      "aspects": {
+        "food": 1,
+        "ingredient": 1
+      },
+      "xtriggers": {
+        "village": [
+          {
+            "id": "shipment"
+          }
+        ]
+      },
+      "lifetime": 240
+    },
+    {
+      "icon": "vaultcapital4",
+      "id": "shop.seeds",
+      "label": "Gardening Center",
+      "aspects": {
+        "location": 1
+      },
+      "slots": [
+        {
+          "id": "funds",
+          "label": "Funds",
+          "description": "Funds to purchase seeds with.",
+          "actionId": "explore",
+          "required": {
+            "funds": 1
+          },
+          "consumes": true
+        }
+      ],
+      "unique": true
+    }
+  ]
+}

@@ -1,0 +1,1033 @@
+{
+  "recipes": [
+    {
+      "id": "plant.wheat",
+      "label": "Sowing Wheat Seeds",
+      "actionId": "work",
+      "startdescription": "Planting ",
+      "craftable": true,
+      "warmup": 10,
+      "effects": {
+        "seeds.wheat": "-1",
+        "plot.wheat": "1",
+        "plot.empty": "-1"
+      },
+      "aspects": {
+        "fatiguing": 1
+      },
+      "requirements": {
+        "seeds.wheat": "1",
+        "heart": "2",
+        "plot.empty": "1"
+      }
+    },
+    {
+      "id": "cropgrowth",
+      "label": "The Miracle of Life",
+      "actionId": "cropgrowth",
+      "startdescription": "Nice green fields, nearing the point at which they can be harvested...",
+      "description": "It looks like it's harvesting season!",
+      "warmup": 30,
+      "linked": [
+        {
+          "id": "cropgrowth",
+          "chance": 100
+        }
+      ],
+      "alternativerecipes": [
+        {
+          "id": "cropgrown",
+          "chance": 100,
+          "additional": true,
+          "expulsion": {
+            "filter": {
+              "plot.wheat": 1
+            },
+            "limit": 1
+          }
+        }
+      ],
+      "slots": [
+        {
+          "id": "Crop",
+          "label": "Crop",
+          "description": "A crop is ready to make the transition.",
+          "required": {
+            "growing": 1
+          },
+          "greedy": true
+        }
+      ]
+    },
+    {
+      "id": "harvestgrowncrop",
+      "label": "Harvest",
+      "actionId": "work",
+      "startdescription": "It's time to put those muscles to work again.",
+      "craftable": true,
+      "warmup": 30,
+      "requirements": {
+        "crop": "1",
+        "grown": "1",
+        "growing": "-1"
+      },
+      "alternativerecipes": [
+        {
+          "id": "harvestgrowncorn",
+          "chance": 100
+        },
+        {
+          "id": "harvestgrownwheat",
+          "chance": 100
+        },
+        {
+          "id": "harvestgrownwheatbountiful",
+          "chance": 100
+        }
+      ],
+      "slots": [
+        {
+          "id": "Work",
+          "label": "Work",
+          "description": "Harvest Season is a lot of work...",
+          "required": {
+            "farmhand": 1,
+            "health": 1
+          },
+          "greedy": false
+        }
+      ]
+    },
+    {
+      "id": "harvestgrownwheat",
+      "label": "Harvest",
+      "actionId": "work",
+      "description": "The Harvest is over, and you have enough grain to feed the village.",
+      "effects": {},
+      "aspects": {
+        "fatiguing": 1,
+        "harvest": 1
+      },
+      "deckeffect": {
+        "harvest.wheat": 3
+      },
+      "requirements": {
+        "heart": "2",
+        "plot.wheat.grown": "1"
+      }
+    },
+    {
+      "id": "hirefarmhand",
+      "label": "Hiring a Farmhand",
+      "actionId": "talk",
+      "craftable": true,
+      "warmup": 15,
+      "aspects": {
+        "payvillager": 1
+      },
+      "requirements": {
+        "funds": "1",
+        "villager": "1"
+      }
+    },
+    {
+      "id": "renewfarmhand",
+      "label": "Renew Contract with Farmhand",
+      "actionId": "talk",
+      "craftable": true,
+      "warmup": 15,
+      "aspects": {
+        "payvillager": 1
+      },
+      "requirements": {
+        "funds": "1",
+        "farmhand": "1"
+      }
+    },
+    {
+      "id": "feedvillage",
+      "label": "Bringing in the Goods",
+      "actionId": "explore",
+      "startdescription": "You're bringing in the latest shipment of food.",
+      "craftable": true,
+      "warmup": 10,
+      "effects": {
+        "villager": "1"
+      },
+      "requirements": {
+        "village": "1",
+        "food": "1"
+      },
+      "linked": [
+        {
+          "id": "feedvillagemore",
+          "chance": 100
+        }
+      ]
+    },
+    {
+      "id": "feedvillagemorefood",
+      "label": "A Bountiful Convoy",
+      "actionId": "explore",
+      "startdescription": "Even more food",
+      "description": "More Food!",
+      "warmup": 5,
+      "effects": {
+        "villager": "1"
+      },
+      "requirements": {
+        "food": "1"
+      },
+      "linked": [
+        {
+          "id": "feedvillagemore",
+          "chance": 100
+        }
+      ]
+    },
+    {
+      "id": "feedvillagemore",
+      "label": "Send more?",
+      "actionId": "explore",
+      "startdescription": "Are you going to send more?",
+      "description": "Not this time.",
+      "warmup": 5,
+      "aspects": {
+        "sell": 1
+      },
+      "linked": [
+        {
+          "id": "feedvillagepost",
+          "chance": 100
+        }
+      ],
+      "alternativerecipes": [
+        {
+          "id": "feedvillagewarpedfood",
+          "chance": 100
+        },
+        {
+          "id": "feedvillagemorefood",
+          "chance": 100
+        }
+      ],
+      "slots": [
+        {
+          "id": "food.wheat",
+          "label": "A Larger Shipment?",
+          "description": "You can send more Wheat if you want to.",
+          "required": {
+            "food": 1
+          },
+          "greedy": true
+        }
+      ]
+    },
+    {
+      "id": "cleardeadplot",
+      "label": "Clearing the Dead Crop",
+      "actionId": "work",
+      "craftable": true,
+      "warmup": 60,
+      "effects": {},
+      "aspects": {
+        "fatiguing": 1,
+        "harvest": 1
+      },
+      "requirements": {
+        "heart": "2",
+        "plot.dead": "1"
+      }
+    },
+    {
+      "id": "abductvillager",
+      "label": "Abduct a Villager",
+      "actionId": "talk",
+      "startdescription": "You can lure a villager to your farm, where nobody can hear them scream.",
+      "description": "They scream for hours, but eventually quiet down. You've got them in the palm of your hands now.",
+      "craftable": true,
+      "warmup": 60,
+      "requirements": {
+        "farmhouse": "1",
+        "villager": "1"
+      },
+      "linked": [
+        {
+          "id": "abductvillagernoedge",
+          "chance": 100
+        }
+      ],
+      "alternativerecipes": [
+        {
+          "id": "abductvillager10edge",
+          "chance": 100
+        },
+        {
+          "id": "abductvillager5edge",
+          "chance": 100
+        }
+      ],
+      "slots": [
+        {
+          "id": "tool",
+          "label": "Weapon",
+          "description": "A Weapon could be used to intimidate the villager, making them more likely to comply.",
+          "required": {
+            "tool": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "studyopenfarmertablet",
+      "label": "Studying the Strange Tablet",
+      "actionId": "study",
+      "startdescription": "What a strange stone...",
+      "description": "It appears to a large tablet with engravings on one side, perhaps you could deciper the images?",
+      "warmup": 15,
+      "effects": {
+        "farmertablet": "1"
+      },
+      "alternativerecipes": [
+        {
+          "id": "explorefarmeropen",
+          "chance": 100,
+          "additional": true
+        }
+      ]
+    },
+    {
+      "id": "harvestfirstcrop",
+      "label": "Your First Harvest",
+      "actionId": "work",
+      "startdescription": "This will be your first Harvest since your father died. You hope you can get it all.",
+      "description": "Your plow has stuck a large stone and brought it up. One side is perfectly flat and covered in engravings.",
+      "craftable": true,
+      "warmup": 60,
+      "aspects": {
+        "harvest": 1
+      },
+      "deckeffect": {
+        "harvest.wheat": 3
+      },
+      "requirements": {
+        "plot.wheat.first": "1",
+        "health": "1"
+      },
+      "alternativerecipes": [
+        {
+          "id": "studyopenfarmertablet",
+          "chance": 100,
+          "additional": true
+        }
+      ]
+    },
+    {
+      "id": "abductvillager5edge",
+      "label": "Abduct a Villager",
+      "actionId": "talk",
+      "requirements": {
+        "edge": "5",
+        "tool": "1",
+        "villager": "1"
+      },
+      "linked": [
+        {
+          "id": "abductvillagersuccess",
+          "chance": 70
+        }
+      ]
+    },
+    {
+      "id": "abductvillagersuccess",
+      "label": "A New Prisoner",
+      "actionId": "talk",
+      "effects": {
+        "notoriety": "1",
+        "villager": "-1"
+      },
+      "deckeffect": {
+        "randomvictim": 1
+      }
+    },
+    {
+      "id": "abductvillager10edge",
+      "label": "Abduct a Villager",
+      "actionId": "talk",
+      "startdescription": "10 edge",
+      "warmup": 30,
+      "requirements": {
+        "edge": "10",
+        "tool": "1"
+      },
+      "linked": [
+        {
+          "id": "abductvillagersuccess",
+          "chance": 100
+        }
+      ]
+    },
+    {
+      "id": "abductvillagernoedge",
+      "label": "Abduct a Villager",
+      "actionId": "talk",
+      "warmup": 30,
+      "requirements": {
+        "edge": "-5"
+      },
+      "linked": [
+        {
+          "id": "abductvillagersuccess",
+          "chance": 30
+        }
+      ]
+    },
+    {
+      "id": "abductvillagerfailure",
+      "label": "A Failed Abduction",
+      "actionId": "talk",
+      "effects": {
+        "notoriety": "1"
+      }
+    },
+    {
+      "id": "studyfarmertablet",
+      "label": "Studying the Tablet",
+      "actionId": "study",
+      "startdescription": "The tablet is coated in engravings, perhaps some of them hold secrets...",
+      "description": "The Tablet depicts The Beachcomber watching various scenes that you would rather not think about.",
+      "craftable": true,
+      "warmup": 60,
+      "effects": {
+        "reason": "1",
+        "fragmentknock": "1",
+        "farmertablet": "-1",
+        "fragmentgrail": "1",
+        "temptationflesh": "1"
+      },
+      "requirements": {
+        "farmertablet": "1"
+      },
+      "alternativerecipes": [
+        {
+          "id": "explorefarmeropen",
+          "chance": 100,
+          "additional": true
+        }
+      ]
+    },
+    {
+      "id": "dreamfarmeropen",
+      "label": "Dreams of Blood and Wine",
+      "actionId": "dream",
+      "startdescription": "Ever since laying eyes on that tablet, you've been having disturbing dreams.",
+      "description": "[Insert Description of Grail Dream] Featured vividly in the dream is an individual that you're sure you've seen before...",
+      "warmup": 60,
+      "effects": {
+        "passion": "1"
+      },
+      "alternativerecipes": [
+        {
+          "id": "talkfarmeropen",
+          "chance": 100,
+          "additional": true
+        }
+      ]
+    },
+    {
+      "id": "talkfarmeropen",
+      "label": "Finding Someone",
+      "actionId": "talk",
+      "startdescription": "You searched high and low for this person, and you found them. Now you can ask them about their presence in your dreams.",
+      "description": "They're as shocked as you are. You were in their dream as well. The same dream. The two of you are sure there's a connection between you two, and agree to stay in touch.",
+      "warmup": 60,
+      "deckeffect": {
+        "acquaintances": 1
+      }
+    },
+    {
+      "id": "explorefarmeropen",
+      "label": "Searching for someone",
+      "actionId": "explore",
+      "startdescription": "It'a about time you bring your harvest to town.",
+      "description": "",
+      "warmup": 15,
+      "effects": {
+        "village": "1"
+      },
+      "alternativerecipes": [
+        {
+          "id": "dreamfarmeropen",
+          "chance": 100,
+          "additional": true
+        }
+      ]
+    },
+    {
+      "id": "cropgrown",
+      "label": "A Grown Crop",
+      "actionId": "cropgrown",
+      "warmup": 1,
+      "requirements": {
+        "growing": "1"
+      },
+      "alternativerecipes": [
+        {
+          "id": "cropgrownwheatbountiful",
+          "chance": 10
+        }
+      ],
+      "mutations": [
+        {
+          "filterOnAspectId": "crop",
+          "mutateAspectId": "grown",
+          "mutationLevel": 1
+        },
+        {
+          "filterOnAspectId": "crop",
+          "mutateAspectId": "growing",
+          "mutationLevel": -1
+        },
+        {
+          "filterOnAspectId": "crop",
+          "mutateAspectId": "job",
+          "mutationLevel": 1
+        }
+      ]
+    },
+    {
+      "id": "needs",
+      "extends": [
+        "needs"
+      ],
+      "slots": [
+        {
+          "id": "Hunger",
+          "label": "Hunger",
+          "description": "As time passes, you'll need food to survive. You can buy some or... supply it yourself.",
+          "required": {
+            "funds": 1,
+            "prisoner": 1
+          },
+          "greedy": true
+        }
+      ]
+    },
+    {
+      "id": "starvation",
+      "extends": [
+        "starvation"
+      ],
+      "requirements$extend": {
+        "prisoner": "-1"
+      }
+    },
+    {
+      "id": "discardseason",
+      "extends": [
+        "discardseason"
+      ],
+      "effects$extend": {
+        "food": "-999",
+        "prisoner": "-999"
+      }
+    },
+    {
+      "id": "buymoreland",
+      "label": "Buy More Farm Land",
+      "actionId": "talk",
+      "startdescription": "You're going to need a larger scale operation to keep up with your own needs and those of the town.",
+      "description": "And with the purchase of an additional parcel of land, you have expanded your farm.",
+      "craftable": true,
+      "warmup": 30,
+      "effects": {
+        "funds": "-1",
+        "plot.dead": "1"
+      },
+      "requirements": {
+        "farmhouse": "1",
+        "funds": "1"
+      }
+    },
+    {
+      "id": "harvestgrownwheatbountiful",
+      "label": "A Bountiful Wheat Harvest",
+      "actionId": "work",
+      "description": "An unusually large harvest has allowed us to produce a record-breaking amount of grain.",
+      "aspects": {
+        "fatiguing": 1,
+        "harvest": 1
+      },
+      "deckeffect": {
+        "harvest.wheat": 6
+      },
+      "requirements": {
+        "heart": "2",
+        "plot.wheat.bountiful": "1"
+      }
+    },
+    {
+      "id": "cropgrownwheatbountiful",
+      "label": "Legendary Growth!",
+      "actionId": "cropgrowth",
+      "startdescription": "my my!",
+      "description": "This crop has grown beyong our wildest expecations!",
+      "warmup": 1,
+      "effects": {
+        "plot.wheat.bountiful": "1"
+      },
+      "requirements": {
+        "plot.wheat": "-1"
+      }
+    },
+    {
+      "id": "feedvillagepost",
+      "label": "A Convoy",
+      "actionId": "explore",
+      "description": "The convoy has reached its destination."
+    },
+    {
+      "id": "ritualwarpcropwithprisoner",
+      "label": "The Red Fertilizer",
+      "actionId": "work",
+      "startdescription": "With the combination of forge and grail to reshape the form of the crop (using a (un)fortunate soul for extra material...) and moth to give it shape, you can create something... wonderful.",
+      "description": "",
+      "craftable": true,
+      "warmup": 30,
+      "requirements": {
+        "ritual": "1",
+        "moth": "2",
+        "forge": "4",
+        "grail": "6",
+        "desire": "-1"
+      },
+      "linked": [
+        {
+          "id": "ritualwarpcropselect",
+          "chance": 70
+        },
+        {
+          "id": "ritualwarpcropfail",
+          "chance": 100
+        }
+      ],
+      "slots": [
+        {
+          "id": "prisoner",
+          "label": "The Sacrifice",
+          "description": "An unwilling participant.",
+          "required": {
+            "prisoner": 1
+          },
+          "greedy": true
+        }
+      ]
+    },
+    {
+      "id": "ritualwarpcropselect",
+      "label": "Which field?",
+      "actionId": "work",
+      "warmup": 30,
+      "aspects": {},
+      "requirements": {
+        "prisoner": "1"
+      },
+      "linked": [
+        {
+          "id": "ritualwarpcropfail",
+          "chance": 100
+        }
+      ],
+      "alternativerecipes": [
+        {
+          "id": "ritualwarpcropsuccess",
+          "chance": 70
+        }
+      ],
+      "slots": [
+        {
+          "id": "crop",
+          "label": "A Sown Field",
+          "description": "Any plot will work, so long as there are crops in it.",
+          "required": {
+            "crop": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "ritualwarpcropsuccess",
+      "label": "A Red Fertilizer",
+      "actionId": "work",
+      "warmup": 30,
+      "aspects": {
+        "killmortal": 1
+      },
+      "requirements": {
+        "crop": "1"
+      },
+      "mutations": [
+        {
+          "filterOnAspectId": "crop",
+          "mutateAspectId": "warped",
+          "mutationLevel": 1,
+          "additive": true
+        }
+      ]
+    },
+    {
+      "id": "ritualwarpcropfail",
+      "label": "A Failed Sacrifice",
+      "actionId": "work",
+      "description": "The failed ritual has drawn some attention and wasted the sacrifice.",
+      "effects": {
+        "notoriety": "1"
+      },
+      "aspects": {},
+      "requirements": {}
+    },
+    {
+      "id": "arcane_forge_grail_grand",
+      "extends": [
+        "arcane_forge_grail_grand"
+      ],
+      "requirements$extend": {
+        "moth": "-1",
+        "edge": "-1"
+      }
+    },
+    {
+      "id": "arcane_forge_grail_hint",
+      "extends": [
+        "arcane_forge_grail_hint"
+      ],
+      "requirements$extend": {
+        "moth": "-1",
+        "edge": "-1"
+      }
+    },
+    {
+      "id": "arcane_forge_grail_major",
+      "extends": [
+        "arcane_forge_grail_major"
+      ],
+      "requirements$extend": {
+        "moth": "-1",
+        "edge": "-1"
+      }
+    },
+    {
+      "id": "arcane_forge_grail_minor",
+      "extends": [
+        "arcane_forge_grail_minor"
+      ],
+      "requirements$extend": {
+        "moth": "-1",
+        "edge": "-1"
+      }
+    },
+    {
+      "id": "recruitvillageredge",
+      "label": "Recruiting a Villager with Edge",
+      "actionId": "talk",
+      "craftable": true,
+      "warmup": 60,
+      "effects": {
+        "mystique": "1",
+        "villager": "-1"
+      },
+      "deckeffect": {
+        "genericvillagerrecruitment": 1
+      },
+      "requirements": {
+        "venerationedge": "1",
+        "edge": "2",
+        "villager": "1"
+      }
+    },
+    {
+      "id": "recruitvillagerforge",
+      "label": "Recruiting a Villager with Forge",
+      "actionId": "talk",
+      "craftable": true,
+      "warmup": 60,
+      "effects": {
+        "mystique": "1",
+        "villager": "-1"
+      },
+      "deckeffect": {
+        "genericvillagerrecruitment": 1
+      },
+      "requirements": {
+        "venerationforge": "1",
+        "forge": "2",
+        "villager": "1"
+      }
+    },
+    {
+      "id": "recruitvillagergrail",
+      "label": "Recruiting a Villager with Grail",
+      "actionId": "talk",
+      "craftable": true,
+      "warmup": 60,
+      "effects": {
+        "mystique": "1",
+        "villager": "-1"
+      },
+      "deckeffect": {
+        "genericvillagerrecruitment": 1
+      },
+      "requirements": {
+        "villager": "1",
+        "grail": "2",
+        "venerationgrail": "1"
+      }
+    },
+    {
+      "id": "recruitvillagerheart",
+      "label": "Recruiting a Villager with Heart",
+      "actionId": "talk",
+      "craftable": true,
+      "warmup": 60,
+      "effects": {
+        "mystique": "1",
+        "villager": "-1"
+      },
+      "deckeffect": {
+        "genericvillagerrecruitment": 1
+      },
+      "requirements": {
+        "villager": "1",
+        "heart": "2",
+        "venerationheart": "1"
+      }
+    },
+    {
+      "id": "recruitvillagerknock",
+      "label": "Recruiting a Villager with Knock",
+      "actionId": "talk",
+      "craftable": true,
+      "warmup": 60,
+      "effects": {
+        "mystique": "1",
+        "villager": "-1"
+      },
+      "deckeffect": {
+        "genericvillagerrecruitment": 1
+      },
+      "requirements": {
+        "knock": "2",
+        "venerationknock": "1",
+        "villager": "1"
+      }
+    },
+    {
+      "id": "recruitvillagerlantern",
+      "label": "Recruiting a Villager with Lantern",
+      "actionId": "talk",
+      "craftable": true,
+      "warmup": 60,
+      "effects": {
+        "mystique": "1",
+        "villager": "-1"
+      },
+      "deckeffect": {
+        "genericvillagerrecruitment": 1
+      },
+      "requirements": {
+        "lantern": "2",
+        "venerationlantern": "1",
+        "villager": "1"
+      }
+    },
+    {
+      "id": "recruitvillagermoth",
+      "label": "Recruiting a Villager with Moth",
+      "actionId": "talk",
+      "craftable": true,
+      "warmup": 60,
+      "effects": {
+        "mystique": "1",
+        "villager": "-1"
+      },
+      "deckeffect": {
+        "genericvillagerrecruitment": 1
+      },
+      "requirements": {
+        "moth": "2",
+        "venerationmoth": "1",
+        "villager": "1"
+      }
+    },
+    {
+      "id": "recruitvillagerwinter",
+      "label": "Recruiting a Villager with Winter",
+      "actionId": "talk",
+      "craftable": true,
+      "warmup": 60,
+      "effects": {
+        "mystique": "1",
+        "villager": "-1"
+      },
+      "deckeffect": {
+        "genericvillagerrecruitment": 1
+      },
+      "requirements": {
+        "villager": "1",
+        "venerationwinter": "1",
+        "winter": "2"
+      }
+    },
+    {
+      "id": "explore.shop.seeds",
+      "label": "Purchase Some Seed",
+      "actionId": "explore",
+      "startdescription": "There's a gardening center in town where you can purchase some seeds to plant.",
+      "description": "You've returned with your seed.",
+      "craftable": true,
+      "warmup": 30,
+      "deckeffect": {
+        "seeds": 1
+      },
+      "requirements": {
+        "funds": "1",
+        "shop.seeds": "1"
+      }
+    },
+    {
+      "id": "feedvillageshipment",
+      "label": "Re-Sending A Shipment",
+      "actionId": "explore",
+      "craftable": true,
+      "warmup": 30,
+      "requirements": {
+        "village": "1",
+        "shipment": "1"
+      },
+      "linked": [
+        {
+          "id": "feedvillagemore",
+          "chance": 100
+        }
+      ]
+    },
+    {
+      "id": "spoiledinduction",
+      "label": "Spoiled Food",
+      "actionId": "spoiledinduction",
+      "warmup": 30,
+      "aspects": {
+        "killmortal": 1
+      },
+      "slots": [
+        {
+          "id": "villager",
+          "label": "Villager",
+          "description": "A villager that will die.",
+          "required": {
+            "villager": 1
+          },
+          "greedy": true
+        }
+      ]
+    },
+    {
+      "id": "harvestgrownwarped",
+      "label": "A Peculiar Harvest",
+      "actionId": "work",
+      "startdescription": "Something is very wrong with these plants...",
+      "description": "You can't believe what you've harvested...",
+      "warmup": 30,
+      "effects": {
+        "food.warped": "2"
+      },
+      "aspects": {
+        "fatiguing": 1,
+        "harvest": 1
+      },
+      "requirements": {
+        "warped": "1"
+      }
+    },
+    {
+      "id": "feedvillagewarpedfood",
+      "label": "A Warped Shipment",
+      "actionId": "explore",
+      "warmup": 5,
+      "effects": {
+        "villager.warped": "1"
+      },
+      "requirements": {
+        "warped": "1"
+      },
+      "linked": [
+        {
+          "id": "feedvillagemore",
+          "chance": 100
+        }
+      ]
+    },
+    {
+      "id": "specialneeds",
+      "label": "Special Needs...",
+      "actionId": "time",
+      "warmup": 60,
+      "linked": [
+        {
+          "id": "specialneeds",
+          "chance": 100
+        }
+      ],
+      "slots": [
+        {
+          "id": "prisoner",
+          "label": "Food",
+          "description": "You have certain tastes that you can't seem to go without anymore...",
+          "required": {
+            "prisoner": 1
+          },
+          "greedy": true,
+          "consumes": true
+        }
+      ]
+    },
+    {
+      "id": "harvestgrowncorn",
+      "label": "Harvest",
+      "actionId": "work",
+      "description": "The Harvest is over, and you have enough corn to feed the village.",
+      "aspects": {
+        "fatiguing": 1,
+        "harvest": 1
+      },
+      "deckeffect": {
+        "harvest.corn": 4
+      },
+      "requirements": {
+        "heart": "2",
+        "plot.corn.grown": "1"
+      }
+    },
+    {
+      "id": "plant.corn",
+      "label": "Sowing Corn",
+      "actionId": "work",
+      "startdescription": "Planting ",
+      "craftable": true,
+      "warmup": 10,
+      "effects": {
+        "seeds.corn": "-1",
+        "plot.empty": "-1",
+        "plot.corn": "1"
+      },
+      "aspects": {
+        "fatiguing": 1
+      },
+      "requirements": {
+        "seeds.corn": "1",
+        "heart": "2",
+        "plot.empty": "1"
+      }
+    }
+  ]
+}

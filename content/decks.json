@@ -1,0 +1,74 @@
+{
+  "decks": [
+    {
+      "id": "harvest.wheat",
+      "label": "Wheat Harvest",
+      "description": "The results of your hard work.",
+      "defaultcard": "",
+      "spec": [
+        "seeds.wheat",
+        "food.wheat",
+        "food.wheat"
+      ],
+      "resetonexhaustion": true
+    },
+    {
+      "id": "genericvillagerrecruitment",
+      "label": "A Converted Villager...",
+      "description": "A Villager has been persuaded to take up your cause.",
+      "defaultcard": "generic_b",
+      "spec": [
+        "generic_b_edge",
+        "generic_b_forge",
+        "generic_b_grail",
+        "generic_b_heart",
+        "generic_b_knock",
+        "generic_b_lantern",
+        "generic_b_moth",
+        "generic_b_winter"
+      ],
+      "resetonexhaustion": true,
+      "drawmessages": {
+        "generic_b_grail": "A sensuous villager",
+        "generic_b_edge": "A sharp villager.",
+        "generic_b_winter": "A somber villager",
+        "generic_b_forge": "A crafty villager",
+        "generic_b_heart": "A strong villager",
+        "generic_b_lantern": "An enlightened villager",
+        "generic_b_moth": "An erratic villager",
+        "generic_b_knock": "A handy villager"
+      }
+    },
+    {
+      "id": "harvest.corn",
+      "label": "Corn Harvest",
+      "description": "The results of your hard work.",
+      "spec": [
+        "seeds.corn",
+        "food.corn",
+        "food.corn",
+        "food.corn"
+      ],
+      "resetonexhaustion": true
+    },
+    {
+      "id": "seeds",
+      "label": "Purchased Seeds",
+      "description": "This should be enough for a full plot.",
+      "spec": [
+        "seeds.corn",
+        "seeds.wheat"
+      ],
+      "resetonexhaustion": true
+    },
+    {
+      "id": "citysecrets",
+      "spec$append": [
+        "shop.seeds"
+      ],
+      "extends": [
+        "citysecrets"
+      ]
+    }
+  ]
+}

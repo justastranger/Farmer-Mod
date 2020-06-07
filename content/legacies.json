@@ -1,0 +1,26 @@
+{
+  "legacies": [
+    {
+      "id": "farmer",
+      "label": "Farmer",
+      "description": "The Farmer prepares the feast. They grow the crops, feed the cows, gather the eggs. And they use it all to feed their true livestock.",
+      "startdescription": "A nice life out in the country. The smell of manure, the breeze of the wind, and the beauty of the stars...",
+      "image": "grail",
+      "fromEnding": "_",
+      "startingVerbId": "work",
+      "availableWithoutEndingMatch": true,
+      "effects": {
+        "farmhouse": 1,
+        "plot.wheat.first": 1,
+        "health": 2,
+        "funds": 2
+      },
+      "statusbarelements": [
+        "villager",
+        "follower",
+        "funds",
+        "food"
+      ]
+    }
+  ]
+}
