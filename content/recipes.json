@@ -22,44 +22,6 @@
       }
     },
     {
-      "id": "cropgrowth",
-      "label": "The Miracle of Life",
-      "actionId": "cropgrowth",
-      "startdescription": "Nice green fields, nearing the point at which they can be harvested...",
-      "description": "It looks like it's harvesting season!",
-      "warmup": 30,
-      "linked": [
-        {
-          "id": "cropgrowth",
-          "chance": 100
-        }
-      ],
-      "alternativerecipes": [
-        {
-          "id": "cropgrown",
-          "chance": 100,
-          "additional": true,
-          "expulsion": {
-            "filter": {
-              "plot.wheat": 1
-            },
-            "limit": 1
-          }
-        }
-      ],
-      "slots": [
-        {
-          "id": "Crop",
-          "label": "Crop",
-          "description": "A crop is ready to make the transition.",
-          "required": {
-            "growing": 1
-          },
-          "greedy": true
-        }
-      ]
-    },
-    {
       "id": "harvestgrowncrop",
       "label": "Harvest",
       "actionId": "work",
@@ -72,6 +34,10 @@
         "growing": "-1"
       },
       "alternativerecipes": [
+        {
+          "id": "harvestgrownwarped",
+          "chance": 100
+        },
         {
           "id": "harvestgrowncorn",
           "chance": 100
@@ -91,8 +57,9 @@
           "label": "Work",
           "description": "Harvest Season is a lot of work...",
           "required": {
-            "farmhand": 1,
-            "health": 1
+            "follower": 1,
+            "health": 1,
+            "farmhand": 1
           },
           "greedy": false
         }
@@ -103,13 +70,16 @@
       "label": "Harvest",
       "actionId": "work",
       "description": "The Harvest is over, and you have enough grain to feed the village.",
-      "effects": {},
+      "effects": {
+        "seeds.wheat": "1",
+        "food.wheat": "2"
+      },
       "aspects": {
         "fatiguing": 1,
         "harvest": 1
       },
       "deckeffect": {
-        "harvest.wheat": 3
+        "harvest.wheat": 1
       },
       "requirements": {
         "heart": "2",
@@ -151,9 +121,6 @@
       "startdescription": "You're bringing in the latest shipment of food.",
       "craftable": true,
       "warmup": 10,
-      "effects": {
-        "villager": "1"
-      },
       "requirements": {
         "village": "1",
         "food": "1"
@@ -172,9 +139,6 @@
       "startdescription": "Even more food",
       "description": "More Food!",
       "warmup": 5,
-      "effects": {
-        "villager": "1"
-      },
       "requirements": {
         "food": "1"
       },
@@ -182,6 +146,13 @@
         {
           "id": "feedvillagemore",
           "chance": 100
+        }
+      ],
+      "alternativerecipes": [
+        {
+          "id": "villagegrowth",
+          "chance": 25,
+          "additional": true
         }
       ]
     },
@@ -311,8 +282,8 @@
         "harvest.wheat": 3
       },
       "requirements": {
-        "plot.wheat.first": "1",
-        "health": "1"
+        "health": "1",
+        "plot.wheat.first": "1"
       },
       "alternativerecipes": [
         {
@@ -335,6 +306,10 @@
         {
           "id": "abductvillagersuccess",
           "chance": 70
+        },
+        {
+          "id": "abductvillagerfailure",
+          "chance": 100
         }
       ]
     },
@@ -371,6 +346,7 @@
       "id": "abductvillagernoedge",
       "label": "Abduct a Villager",
       "actionId": "talk",
+      "description": "With such little force, you may not succeed.",
       "warmup": 30,
       "requirements": {
         "edge": "-5"
@@ -379,6 +355,10 @@
         {
           "id": "abductvillagersuccess",
           "chance": 30
+        },
+        {
+          "id": "abductvillagerfailure",
+          "chance": 100
         }
       ]
     },
@@ -464,56 +444,6 @@
       ]
     },
     {
-      "id": "cropgrown",
-      "label": "A Grown Crop",
-      "actionId": "cropgrown",
-      "warmup": 1,
-      "requirements": {
-        "growing": "1"
-      },
-      "alternativerecipes": [
-        {
-          "id": "cropgrownwheatbountiful",
-          "chance": 10
-        }
-      ],
-      "mutations": [
-        {
-          "filterOnAspectId": "crop",
-          "mutateAspectId": "grown",
-          "mutationLevel": 1
-        },
-        {
-          "filterOnAspectId": "crop",
-          "mutateAspectId": "growing",
-          "mutationLevel": -1
-        },
-        {
-          "filterOnAspectId": "crop",
-          "mutateAspectId": "job",
-          "mutationLevel": 1
-        }
-      ]
-    },
-    {
-      "id": "needs",
-      "extends": [
-        "needs"
-      ],
-      "slots": [
-        {
-          "id": "Hunger",
-          "label": "Hunger",
-          "description": "As time passes, you'll need food to survive. You can buy some or... supply it yourself.",
-          "required": {
-            "funds": 1,
-            "prisoner": 1
-          },
-          "greedy": true
-        }
-      ]
-    },
-    {
       "id": "starvation",
       "extends": [
         "starvation"
@@ -554,30 +484,20 @@
       "label": "A Bountiful Wheat Harvest",
       "actionId": "work",
       "description": "An unusually large harvest has allowed us to produce a record-breaking amount of grain.",
+      "effects": {
+        "seeds.wheat": "1",
+        "food.wheat": "4"
+      },
       "aspects": {
         "fatiguing": 1,
         "harvest": 1
       },
       "deckeffect": {
-        "harvest.wheat": 6
+        "harvest.wheat": 1
       },
       "requirements": {
         "heart": "2",
-        "plot.wheat.bountiful": "1"
-      }
-    },
-    {
-      "id": "cropgrownwheatbountiful",
-      "label": "Legendary Growth!",
-      "actionId": "cropgrowth",
-      "startdescription": "my my!",
-      "description": "This crop has grown beyong our wildest expecations!",
-      "warmup": 1,
-      "effects": {
-        "plot.wheat.bountiful": "1"
-      },
-      "requirements": {
-        "plot.wheat": "-1"
+        "plot.wheat.grown.bountiful": "1"
       }
     },
     {
@@ -595,16 +515,17 @@
       "craftable": true,
       "warmup": 30,
       "requirements": {
-        "ritual": "1",
-        "moth": "2",
-        "forge": "4",
+        "desire": "-1",
         "grail": "6",
-        "desire": "-1"
+        "heart": "-1",
+        "forge": "4",
+        "moth": "2",
+        "ritual": "1"
       },
       "linked": [
         {
           "id": "ritualwarpcropselect",
-          "chance": 70
+          "chance": 90
         },
         {
           "id": "ritualwarpcropfail",
@@ -641,7 +562,7 @@
       "alternativerecipes": [
         {
           "id": "ritualwarpcropsuccess",
-          "chance": 70
+          "chance": 90
         }
       ],
       "slots": [
@@ -660,8 +581,12 @@
       "label": "A Red Fertilizer",
       "actionId": "work",
       "warmup": 30,
+      "effects": {
+        "corpse": "1",
+        "prisoner": "-1"
+      },
       "aspects": {
-        "killmortal": 1
+        "boost": 1
       },
       "requirements": {
         "crop": "1"
@@ -684,7 +609,20 @@
         "notoriety": "1"
       },
       "aspects": {},
-      "requirements": {}
+      "requirements": {},
+      "alternativerecipes": [
+        {
+          "id": "killmortalexpulsion",
+          "chance": 100,
+          "additional": true,
+          "expulsion": {
+            "filter": {
+              "prisoner": 1
+            },
+            "limit": 1
+          }
+        }
+      ]
     },
     {
       "id": "arcane_forge_grail_grand",
@@ -693,6 +631,7 @@
       ],
       "requirements$extend": {
         "moth": "-1",
+        "heart": "-1",
         "edge": "-1"
       }
     },
@@ -703,6 +642,7 @@
       ],
       "requirements$extend": {
         "moth": "-1",
+        "heart": "-1",
         "edge": "-1"
       }
     },
@@ -713,6 +653,7 @@
       ],
       "requirements$extend": {
         "moth": "-1",
+        "heart": "-1",
         "edge": "-1"
       }
     },
@@ -723,6 +664,7 @@
       ],
       "requirements$extend": {
         "moth": "-1",
+        "heart": "-1",
         "edge": "-1"
       }
     },
@@ -778,9 +720,9 @@
         "genericvillagerrecruitment": 1
       },
       "requirements": {
-        "villager": "1",
+        "venerationgrail": "1",
         "grail": "2",
-        "venerationgrail": "1"
+        "villager": "1"
       }
     },
     {
@@ -797,9 +739,9 @@
         "genericvillagerrecruitment": 1
       },
       "requirements": {
-        "villager": "1",
         "heart": "2",
-        "venerationheart": "1"
+        "venerationheart": "1",
+        "villager": "1"
       }
     },
     {
@@ -873,9 +815,9 @@
         "genericvillagerrecruitment": 1
       },
       "requirements": {
-        "villager": "1",
+        "winter": "2",
         "venerationwinter": "1",
-        "winter": "2"
+        "villager": "1"
       }
     },
     {
@@ -890,8 +832,8 @@
         "seeds": 1
       },
       "requirements": {
-        "funds": "1",
-        "shop.seeds": "1"
+        "shop.seeds": "1",
+        "funds": "1"
       }
     },
     {
@@ -954,9 +896,6 @@
       "label": "A Warped Shipment",
       "actionId": "explore",
       "warmup": 5,
-      "effects": {
-        "villager.warped": "1"
-      },
       "requirements": {
         "warped": "1"
       },
@@ -968,40 +907,20 @@
       ]
     },
     {
-      "id": "specialneeds",
-      "label": "Special Needs...",
-      "actionId": "time",
-      "warmup": 60,
-      "linked": [
-        {
-          "id": "specialneeds",
-          "chance": 100
-        }
-      ],
-      "slots": [
-        {
-          "id": "prisoner",
-          "label": "Food",
-          "description": "You have certain tastes that you can't seem to go without anymore...",
-          "required": {
-            "prisoner": 1
-          },
-          "greedy": true,
-          "consumes": true
-        }
-      ]
-    },
-    {
       "id": "harvestgrowncorn",
       "label": "Harvest",
       "actionId": "work",
       "description": "The Harvest is over, and you have enough corn to feed the village.",
+      "effects": {
+        "food.corn": "3",
+        "seeds.corn": "1"
+      },
       "aspects": {
         "fatiguing": 1,
         "harvest": 1
       },
       "deckeffect": {
-        "harvest.corn": 4
+        "harvest.corn": 1
       },
       "requirements": {
         "heart": "2",
@@ -1028,6 +947,146 @@
         "heart": "2",
         "plot.empty": "1"
       }
+    },
+    {
+      "id": "villagegrowth",
+      "label": "The Village Grows",
+      "actionId": "villagegrowth",
+      "startdescription": "The Villagers have eaten and been fruitful.",
+      "description": "Another Villager joins their midst.",
+      "warmup": 1,
+      "linked": [
+        {
+          "id": "villagegrowth.end",
+          "chance": 100
+        }
+      ]
+    },
+    {
+      "id": "villagegrowth.end",
+      "actionId": "villagegrowth2",
+      "description": "Another Villager joins their midst.",
+      "warmup": 9,
+      "effects": {
+        "villager": "1"
+      }
+    },
+    {
+      "id": "speakpublicly",
+      "extends": [
+        "speakpublicly"
+      ],
+      "extantreqs": {
+        "farmhouse": "-1",
+        "farmhouse.potential": "-1"
+      }
+    },
+    {
+      "id": "ritualwarpvillager",
+      "label": "Infuse a Villager",
+      "actionId": "work",
+      "startdescription": "Grail for their flesh\r\nForge to melt it\r\nHeart to ensure they live, possibly Forever",
+      "description": "Nobody answered the call.\r\nPerhaps next time.",
+      "craftable": true,
+      "warmup": 60,
+      "requirements": {
+        "ritual": "1",
+        "heart": "2",
+        "forge": "4",
+        "desire": "-1",
+        "grail": "6"
+      },
+      "alternativerecipes": [
+        {
+          "id": "ritualwarpvillagersuccess"
+        }
+      ],
+      "slots": [
+        {
+          "id": "villager",
+          "label": "Villager",
+          "description": "A Villager, to be infused with magical power.",
+          "required": {
+            "villager": 1
+          },
+          "greedy": true
+        }
+      ]
+    },
+    {
+      "id": "ritualwarpvillagersuccess",
+      "label": "A Villager, Now Always Willing",
+      "actionId": "work",
+      "description": "You've done horrible things to that villager. They barely even resemble themself. This is not the end for them.",
+      "effects": {
+        "mystique": "1"
+      },
+      "aspects": {
+        "warped": 1
+      },
+      "requirements": {
+        "villager": "1"
+      }
+    },
+    {
+      "id": "harvestgrowncornbountiful",
+      "label": "Harvest",
+      "actionId": "work",
+      "description": "The Harvest is over, and you have enough corn to feed the village.",
+      "effects": {
+        "food.corn": "6",
+        "seeds.corn": "1"
+      },
+      "aspects": {
+        "fatiguing": 1,
+        "harvest": 1
+      },
+      "deckeffect": {
+        "harvest.corn": 1
+      },
+      "requirements": {
+        "plot.corn.grown.bountiful": "1",
+        "heart": "2"
+      }
+    },
+    {
+      "id": "killmortalexpulsion",
+      "actionId": "killmortal",
+      "startdescription": "Oh no! This one has been struck down. Perhaps that was intentional...",
+      "description": "Dead as a doornail, now.",
+      "warmup": 5,
+      "aspects": {
+        "killmortal": 1
+      },
+      "requirements": {
+        "mortal": "1"
+      }
+    },
+    {
+      "id": "ambition",
+      "extends": [
+        "ambition"
+      ],
+      "slots": [
+        {
+          "id": "Obsessions",
+          "label": "Obsessions",
+          "description": "Deeper urges",
+          "required": {
+            "independent": 1,
+            "sensationmarks": 3,
+            "remembrancemarks": 2,
+            "fleshmarks": 3,
+            "crownedmarks": 3,
+            "powermarks": 3,
+            "enlightenmentmarks": 3,
+            "mentor": 1,
+            "changemarks": 1,
+            "resentment": 3
+          },
+          "greedy": true
+        }
+      ]
     }
   ]
 }

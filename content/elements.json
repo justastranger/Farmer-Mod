@@ -1,7 +1,7 @@
 {
   "elements": [
     {
-      "icon": "plot.wheat",
+      "icon": "plot.empty",
       "id": "plot.wheat",
       "label": "Wheat Crop",
       "description": "A Crop of Wheat, still in the ground",
@@ -11,6 +11,11 @@
         "crop": 1
       },
       "xtriggers": {
+        "boost": [
+          {
+            "id": "plot.wheat.grown.bountiful"
+          }
+        ],
         "harvest": [
           {
             "id": "plot.empty"
@@ -100,26 +105,25 @@
     {
       "icon": "vaultshiresdefault",
       "id": "farmhouse",
-      "label": "The Farmhouse",
-      "description": "A Farmhouse out in the country, nice and secluded.",
+      "label": "Our Farmhouse",
+      "uniquenessgroup": "uqfarmhouse",
       "aspects": {
         "location": 1,
-        "hq.potential": 1,
+        "farmhousetracker": 1,
         "hq": 1
       },
       "slots": [
         {
-          "id": "Victim",
-          "label": "Victim",
+          "id": "Cellar",
+          "label": "Cellar",
           "description": "Lure a villager home so that they may be of use to you.",
           "actionId": "talk",
           "required": {
             "villager": 1
-          },
-          "consumes": true
+          }
         },
         {
-          "id": "funds",
+          "id": "purchaseland",
           "label": "funds",
           "description": "Funds to purchase more land with.",
           "actionId": "talk",
@@ -127,8 +131,23 @@
             "funds": 1
           },
           "consumes": true
+        },
+        {
+          "id": "purchaseinfluence",
+          "label": "Funds",
+          "actionId": "explore",
+          "required": {
+            "funds": 1
+          }
         }
       ],
+      "xtriggers": {
+        "movehq": [
+          {
+            "id": "farmhouse.potential"
+          }
+        ]
+      },
       "unique": true
     },
     {
@@ -189,6 +208,7 @@
       "label": "A Villager",
       "description": "A simple villager",
       "aspects": {
+        "grail": 2,
         "mortal": 1
       },
       "slots": [
@@ -308,7 +328,7 @@
     },
     {
       "icon": "plot.wheat",
-      "id": "plot.wheat.bountiful",
+      "id": "plot.wheat.grown.bountiful",
       "label": "Bountiful Wheat Crop",
       "description": "An unusually large crop of wheat.",
       "decayTo": "plot.dead",
@@ -391,14 +411,20 @@
       "icon": "villager.warped",
       "id": "villager.warped",
       "label": "A Warped Villager",
+      "description": "This Villager has been tainted by magic beyond their comprehension. They scream and they moan behind locked doors. Away from prying eyes. They can't take much more of this.",
+      "comments": "Result of blasting a villager with Grail, Forge, and Heart.\r\nCan be used in a ritual to fertilize crops or left to decay in order to generate biomass.",
+      "decayTo": "biomass",
       "aspects": {
-        "mortal": 1,
-        "warped": 1
+        "prisoner": 1,
+        "forge": 2,
+        "grail": 4,
+        "warped": 1,
+        "mortal": 1
       },
       "xtriggers": {
         "killmortal": [
           {
-            "id": "corpse"
+            "id": "biomass"
           }
         ],
         "derangemortal": [
@@ -406,16 +432,20 @@
             "id": "lunatic"
           }
         ]
-      }
+      },
+      "lifetime": 180
     },
     {
       "icon": "ascensionsensationc",
-      "id": "temptationflesh",
+      "id": "ascensionflesha",
       "label": "Temptation: Flesh",
-      "description": "You've become dreaming of being able to mold your body like clay.",
+      "description": "You've started having dreams of your flesh being as malleable as clay...",
+      "uniquenessgroup": "uqascensionflesh",
       "aspects": {
-        "desire": 1
-      }
+        "desire": 1,
+        "fleshmarks": 1
+      },
+      "unique": true
     },
     {
       "icon": "plot.empty",
@@ -427,10 +457,11 @@
         "growing": 1,
         "crop": 1
       },
-      "lifetime": 60
+      "lifetime": 60,
+      "resaturate": true
     },
     {
-      "icon": "plot.wheat1",
+      "icon": "plot.corn.grown",
       "id": "plot.corn.grown",
       "label": "A Corn Field, Grown",
       "description": "A fully grown field of corn",
@@ -441,8 +472,14 @@
         "job": 1
       },
       "xtriggers": {
+        "boost": [
+          {
+            "id": "plot.corn.grown.bountiful"
+          }
+        ],
         "harvest": [
           {
+            "morphEffect": "transform",
             "id": "plot.empty"
           }
         ]
@@ -496,6 +533,177 @@
           "consumes": true
         }
       ],
+      "unique": true
+    },
+    {
+      "icon": "vaultshiresdefault",
+      "id": "farmhouse.potential",
+      "label": "Your Farmhouse",
+      "description": "A Farmhouse out in the country, nice and secluded.",
+      "uniquenessgroup": "uqfarmhouse",
+      "aspects": {
+        "location": 1,
+        "farmhousetracker": 1,
+        "hq.potential": 1
+      },
+      "slots": [
+        {
+          "id": "funds",
+          "label": "funds",
+          "description": "Funds to purchase more land with.",
+          "actionId": "talk",
+          "required": {
+            "funds": 1
+          },
+          "consumes": true
+        },
+        {
+          "id": "Old HQ",
+          "label": "oldhq",
+          "description": "Your old headquarters...",
+          "actionId": "explore",
+          "required": {
+            "hq": 1
+          }
+        }
+      ],
+      "xtriggers": {
+        "movehq": [
+          {
+            "id": "farmhouse"
+          }
+        ]
+      },
+      "unique": true
+    },
+    {
+      "icon": "plot.corn.grown",
+      "id": "plot.corn.grown.bountiful",
+      "label": "A Corn Field, Grown",
+      "description": "A field of corn that has grown even better than normal.",
+      "decayTo": "plot.dead",
+      "aspects": {
+        "crop": 1,
+        "grown": 1,
+        "job": 1
+      },
+      "xtriggers": {
+        "harvest": [
+          {
+            "morphEffect": "transform",
+            "id": "plot.empty"
+          }
+        ]
+      },
+      "lifetime": 120
+    },
+    {
+      "icon": "grail_no_eyes",
+      "id": "biomass",
+      "label": "A Lump of Flesh",
+      "description": "Whatever this used to be, it no longer is. But perhaps it could become something again..?",
+      "aspects": {
+        "ingredient": 1,
+        "heart": 2,
+        "grail": 2
+      }
+    },
+    {
+      "icon": "ascensionsensationc",
+      "id": "ascensionfleshb",
+      "label": "Temptation: Flesh",
+      "description": "You've started having dreams of your flesh being as malleable as clay...",
+      "uniquenessgroup": "uqascensionflesh",
+      "aspects": {
+        "desire": 2,
+        "fleshmarks": 2
+      },
+      "unique": true
+    },
+    {
+      "icon": "ascensionsensationc",
+      "id": "ascensionfleshc",
+      "label": "Temptation: Flesh",
+      "description": "You've started having dreams of your flesh being as malleable as clay...",
+      "uniquenessgroup": "uqascensionflesh",
+      "aspects": {
+        "desire": 3,
+        "fleshmarks": 3
+      },
+      "xtriggers": {
+        "ascend": [
+          {
+            "id": "ascensionfleshd"
+          }
+        ]
+      },
+      "unique": true
+    },
+    {
+      "icon": "ascensionsensationc",
+      "id": "ascensionfleshd",
+      "label": "Temptation: Flesh",
+      "description": "You've started having dreams of your flesh being as malleable as clay...",
+      "uniquenessgroup": "uqascensionflesh",
+      "aspects": {
+        "desire": 4,
+        "fleshmarks": 4
+      },
+      "xtriggers": {
+        "descend": [
+          {
+            "id": "ascensionfleshc"
+          }
+        ],
+        "ascend": [
+          {
+            "id": "ascensionfleshe"
+          }
+        ]
+      },
+      "unique": true
+    },
+    {
+      "icon": "ascensionsensationc",
+      "id": "ascensionfleshe",
+      "label": "Temptation: Flesh",
+      "description": "You've started having dreams of your flesh being as malleable as clay...",
+      "uniquenessgroup": "uqascensionflesh",
+      "aspects": {
+        "desire": 5,
+        "fleshmarks": 5
+      },
+      "xtriggers": {
+        "descend": [
+          {
+            "id": "ascensionfleshd"
+          }
+        ],
+        "ascend": [
+          {
+            "id": "ascensionfleshf"
+          }
+        ]
+      },
+      "unique": true
+    },
+    {
+      "icon": "ascensionsensationc",
+      "id": "ascensionfleshf",
+      "label": "Temptation: Flesh",
+      "description": "You've started having dreams of your flesh being as malleable as clay...",
+      "uniquenessgroup": "uqascensionflesh",
+      "aspects": {
+        "desire": 6,
+        "fleshmarks": 6
+      },
+      "xtriggers": {
+        "descenc": [
+          {
+            "id": "ascensionfleshe"
+          }
+        ]
+      },
       "unique": true
     }
   ]

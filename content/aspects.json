@@ -87,6 +87,57 @@
       "noartneeded": true,
       "icon": "sell",
       "id": "sell"
+    },
+    {
+      "isAspect": true,
+      "isHidden": true,
+      "noartneeded": true,
+      "icon": "uqfarmhouse",
+      "id": "uqfarmhouse",
+      "description": "Farmhouse Uniqueness Group"
+    },
+    {
+      "isAspect": true,
+      "isHidden": true,
+      "noartneeded": true,
+      "icon": "boost",
+      "id": "boost",
+      "description": "XTrigger catalyst for turning a regular growing crop immediately into a bountiful crop."
+    },
+    {
+      "isAspect": true,
+      "isHidden": true,
+      "noartneeded": true,
+      "icon": "farmhousetracker",
+      "id": "farmhousetracker"
+    },
+    {
+      "isAspect": true,
+      "id": "fleshmarks",
+      "label": "The Marks of Shaping",
+      "description": "Something something DEEP MYSTERIES something"
+    },
+    {
+      "isAspect": true,
+      "id": "crownedmarks",
+      "label": "The Marks of Growth",
+      "description": "Oh boy, you're in trouble now. Watch out or else The Crowned Growth will claim you for its own."
+    },
+    {
+      "isAspect": true,
+      "isHidden": true,
+      "noartneeded": true,
+      "icon": "uqfarmhouse",
+      "id": "uqascensionflesh",
+      "description": "Ascension: Flesh Uniqueness Group"
+    },
+    {
+      "isAspect": true,
+      "isHidden": true,
+      "noartneeded": true,
+      "icon": "uqfarmhouse",
+      "id": "uqascensionflesh",
+      "description": "Ascension: Flesh Uniqueness Group"
     }
   ]
 }
